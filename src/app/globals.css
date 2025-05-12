@@ -1,0 +1,184 @@
+@import 'tailwindcss';
+
+@layer base {
+  :root {
+    --background: #f7f7f7;
+    /* slightly off-white */
+    --foreground: #181a20;
+    --card: #f0f0f0;
+    /* light gray for cards */
+    --card-foreground: #181a20;
+    --popover: #ffffff;
+    --popover-foreground: #181a20;
+    --primary: #232946;
+    --primary-foreground: #f6f8fa;
+    --secondary: #e3eaf6;
+    /* more visible than default */
+    --secondary-foreground: #232946;
+    --muted: #f3f6fa;
+    --muted-foreground: #6b7280;
+    --accent: #f3f6fa;
+    --accent-foreground: #232946;
+    --destructive: #ff3333;
+    /* STRONGER RED */
+    --destructive-foreground: #f6f8fa;
+    --border: #cbd5e1;
+    /* slightly darker for visibility */
+    --input: #e5eaf1;
+    /* slightly darker for switch bg */
+    --ring: #181a20;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #181a20;
+    --foreground: #f6f8fa;
+    --card: #181a20;
+    --card-foreground: #f6f8fa;
+    --popover: #181a20;
+    --popover-foreground: #f6f8fa;
+    --primary: #f6f8fa;
+    --primary-foreground: #232946;
+    --secondary: #232946;
+    --secondary-foreground: #f6f8fa;
+    --muted: #232946;
+    --muted-foreground: #a0aec0;
+    --accent: #232946;
+    --accent-foreground: #f6f8fa;
+    --destructive: #a83232;
+    --destructive-foreground: #f6f8fa;
+    --border: #232946;
+    --input: #232946;
+    --ring: #e3eaf6;
+  }
+}
+
+@layer utilities {
+  .bg-background {
+    background-color: var(--background);
+  }
+
+  .bg-foreground {
+    background-color: var(--foreground);
+  }
+
+  .bg-card {
+    background-color: var(--card);
+  }
+
+  .bg-card-foreground {
+    background-color: var(--card-foreground);
+  }
+
+  .bg-popover {
+    background-color: var(--popover);
+  }
+
+  .bg-popover-foreground {
+    background-color: var(--popover-foreground);
+  }
+
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .bg-primary-foreground {
+    background-color: var(--primary-foreground);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+
+  .bg-secondary-foreground {
+    background-color: var(--secondary-foreground);
+  }
+
+  .bg-muted {
+    background-color: var(--muted);
+  }
+
+  .bg-muted-foreground {
+    background-color: var(--muted-foreground);
+  }
+
+  .bg-accent {
+    background-color: var(--accent);
+  }
+
+  .bg-accent-foreground {
+    background-color: var(--accent-foreground);
+  }
+
+  .bg-destructive {
+    background-color: var(--destructive);
+  }
+
+  .bg-destructive-foreground {
+    background-color: var(--destructive-foreground);
+  }
+
+  .border-border {
+    border-color: var(--border);
+  }
+
+  .border-input {
+    border-color: var(--input);
+  }
+
+  .border-ring {
+    border-color: var(--ring);
+  }
+
+  .text-foreground {
+    color: var(--foreground);
+  }
+
+  .text-card-foreground {
+    color: var(--card-foreground);
+  }
+
+  .text-popover-foreground {
+    color: var(--popover-foreground);
+  }
+
+  .text-primary {
+    color: var(--primary);
+  }
+
+  .text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+
+  .text-secondary {
+    color: var(--secondary);
+  }
+
+  .text-secondary-foreground {
+    color: var(--secondary-foreground);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+
+  .text-accent-foreground {
+    color: var(--accent-foreground);
+  }
+
+  .text-destructive {
+    color: var(--destructive);
+  }
+
+  .text-destructive-foreground {
+    color: var(--destructive-foreground);
+  }
+}
