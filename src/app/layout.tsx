@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Toaster richColors closeButton position="top-right" />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
