@@ -35,7 +35,7 @@ export default function InboxPage() {
   return (
     <main className="min-h-screen bg-muted text-foreground">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 py-4">
-        <Navbar />
+        <Navbar from="inbox" />
         {/* Mobile: show either list or preview. Desktop: show both side by side. */}
         <div className="flex flex-col md:flex-row gap-4 h-[calc(100vh-110px)]">
           {/* Inbox List */}

@@ -3,12 +3,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Email } from '@/lib/api';
 import DOMPurify from 'dompurify';
+import CopyToClipboard from './CopyToClipBoard';
 
 interface EmailPreviewProps {
   email: Email | null;
 }
 
 export default function EmailPreview({ email }: EmailPreviewProps) {
+
+
   if (!email) {
     return (
       <section className="flex-1 h-full overflow-y-auto bg-card shadow-sm rounded-lg flex items-center justify-center text-muted-foreground p-4">
@@ -16,6 +19,7 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
       </section>
     );
   }
+
   return (
     <section className="w-full h-full flex flex-col">
       <Tabs defaultValue="html" className="flex flex-col h-full">
@@ -38,11 +42,17 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
             </div>
             <div className="flex flex-col sm:flex-row sm:gap-2">
               <span className="font-semibold text-foreground">From:</span>{' '}
-              <span className="break-all">{email.from}</span>
+              <div className="flex items-center gap-2">
+                <span className="break-all text-foreground truncate w-[90%]">{email.from}</span>
+                <CopyToClipboard text={email.from} />
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row sm:gap-2">
               <span className="font-semibold text-foreground">To:</span>{' '}
-              <span className="break-all">{email.to}</span>
+              <div className="flex items-center gap-2">
+                <span className="break-all text-foreground truncate w-[90%]">{email.to}</span>
+                <CopyToClipboard text={email.to} />
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row sm:gap-2">
               <span className="font-semibold text-foreground">Date:</span>{' '}

@@ -1,51 +1,49 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { clearCredentials } from '@/lib/storage';
+import { clearCredentials, getCredentials } from '@/lib/storage';
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
-import { Sun, Moon, Monitor } from 'lucide-react';
-import { useEffect } from 'react';
+import { useSystemTheme } from '@/hooks/useSystemTheme';
+import { useMemo } from 'react';
 
-const themeIcon = {
-  light: <Sun className="w-5 h-5" />,
-  dark: <Moon className="w-5 h-5" />,
-  system: <Monitor className="w-5 h-5" />,
-};
-
-export default function Navbar() {
+export default function Navbar({
+  from,
+}: {
+  from: 'inbox' | 'home';
+}) {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    // Only listen for system theme changes if we're in system mode
-    if (theme !== 'system') return;
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      e.preventDefault();
-      // Only update if we're still in system mode
-      if (theme === 'system') {
-        setTheme('system'); // This will force next-themes to re-evaluate the system theme
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme, setTheme]);
+  const { ThemeIcon, handleThemeToggle, mounted } = useSystemTheme();
 
   const handleLogout = () => {
     clearCredentials();
     router.replace('/auth');
   };
 
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('system');
-    } else {
-      setTheme('light');
+  const hasCredentials = useMemo(() => {
+    return !!getCredentials();
+  }, []);
+
+  // if from home,
+  //  - has no credentials -> show get started btn
+  //  - has credentials -> show go to inbox btn
+  // if from inbox,
+  //  - show logout btn
+  const getCTA = () => {
+    if (from === 'home') {
+      return hasCredentials ? (
+        <Button size="sm" variant="outline" onClick={() => router.push('/inbox')}>
+          Go to Inbox
+        </Button>
+      ) : (
+        <Button size="sm" variant="outline" onClick={() => router.push('/auth')}>
+          Get Started
+        </Button>
+      );
     }
+    return (
+      <Button size="sm" variant="outline" onClick={handleLogout}>
+        Logout
+      </Button>
+    );
   };
 
   return (
@@ -56,14 +54,13 @@ export default function Navbar() {
           size="icon"
           variant="ghost"
           aria-label="Toggle theme"
-          onClick={toggleTheme}
+          onClick={handleThemeToggle}
           className="border border-border rounded-full"
+          disabled={!mounted}
         >
-          {themeIcon[theme as keyof typeof themeIcon]}
+          <ThemeIcon className="w-5 h-5" />
         </Button>
-        <Button size="sm" variant="outline" onClick={handleLogout} className="">
-          Logout
-        </Button>
+        {getCTA()}
       </div>
     </nav>
   );

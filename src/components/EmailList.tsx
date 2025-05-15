@@ -6,7 +6,8 @@ import { TestmailClient, Email } from '@/lib/api';
 import { format } from 'date-fns';
 import { FilterDialog } from './FilterDialog';
 import { DateRange } from 'react-day-picker';
-import { Filter } from 'lucide-react';
+import { Filter, RefreshCw } from 'lucide-react';
+import CopyToClipboard from './CopyToClipBoard';
 
 interface EmailListProps {
   selectedEmail: Email | null;
@@ -96,7 +97,11 @@ export default function EmailList({ selectedEmail, setSelectedEmail }: EmailList
   return (
     <aside className="w-full h-full flex flex-col">
       <div className="p-4 border-b border-border flex items-center justify-between">
-        <h2 className="text-base font-semibold text-foreground">Inbox</h2>
+        <div className="text-foreground flex items-center gap-1">
+          <h2 className="text-base font-semibold">Inbox</h2>
+          <span className="text-muted-foreground">({inboxId})</span>
+          <CopyToClipboard text={inboxId} />
+        </div>
         <div className="flex items-center gap-2">
           <div className="relative">
             <Button
@@ -106,14 +111,15 @@ export default function EmailList({ selectedEmail, setSelectedEmail }: EmailList
               className="flex items-center gap-2"
             >
               <Filter className="h-4 w-4" />
-              Filter
+              {/* Filter */}
             </Button>
             {hasActiveFilters && (
               <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-blue-500 ring-2 ring-background" />
             )}
           </div>
           <Button size="sm" variant="outline" onClick={() => fetchEmails(true)} disabled={loading}>
-            Refresh
+            {/* Refresh */}
+            <RefreshCw className="h-4 w-4" />
           </Button>
         </div>
       </div>
