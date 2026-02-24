@@ -75,24 +75,21 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
           </TabsContent>
           <TabsContent value="headers">
             {email.headers && email.headers.length > 0 ? (
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left font-semibold text-foreground p-2 w-1/3">Key</th>
-                    <th className="text-left font-semibold text-foreground p-2">Line</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {email.headers.map((header, index) => (
-                    <tr key={index} className="border-b border-border last:border-0">
-                      <td className="p-2 font-medium text-foreground align-top break-all">{header.key}</td>
-                      <td className="p-2 text-muted-foreground align-top break-all">{header.line}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className="p-4 space-y-2">
+                {email.headers.map((header, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 rounded-md px-3 py-2.5 bg-muted/50 hover:bg-muted transition-colors"
+                  >
+                    <span className="shrink-0 inline-block text-xs font-semibold text-primary bg-primary/10 rounded px-2 py-0.5 sm:max-w-44 break-all">
+                      {header.key}
+                    </span>
+                    <span className="text-sm text-muted-foreground break-all">{header.line}</span>
+                  </div>
+                ))}
+              </div>
             ) : (
-              <p className="text-muted-foreground p-2">No headers available.</p>
+              <p className="text-muted-foreground p-4">No headers available.</p>
             )}
           </TabsContent>
         </div>
