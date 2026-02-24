@@ -78,15 +78,15 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
               <table className="w-full text-sm border-collapse">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left font-semibold text-foreground p-2 w-1/3">Name</th>
-                    <th className="text-left font-semibold text-foreground p-2">Value</th>
+                    <th className="text-left font-semibold text-foreground p-2 w-1/3">Key</th>
+                    <th className="text-left font-semibold text-foreground p-2">Line</th>
                   </tr>
                 </thead>
                 <tbody>
                   {email.headers.map((header, index) => (
                     <tr key={index} className="border-b border-border last:border-0">
-                      <td className="p-2 font-medium text-foreground align-top break-all">{header.name}</td>
-                      <td className="p-2 text-muted-foreground align-top break-all">{header.value}</td>
+                      <td className="p-2 font-medium text-foreground align-top break-all">{header.key}</td>
+                      <td className="p-2 text-muted-foreground align-top break-all">{header.line}</td>
                     </tr>
                   ))}
                 </tbody>
