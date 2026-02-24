@@ -1,6 +1,14 @@
 'use client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Email } from '@/lib/api';
 import DOMPurify from 'dompurify';
 import CopyToClipboard from './CopyToClipBoard';
@@ -75,18 +83,35 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
           </TabsContent>
           <TabsContent value="headers">
             {email.headers && email.headers.length > 0 ? (
-              <div className="p-4 space-y-2">
-                {email.headers.map((header, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 rounded-md px-3 py-2.5 bg-muted/50 hover:bg-muted transition-colors"
-                  >
-                    <span className="shrink-0 inline-block text-xs font-semibold text-primary bg-primary/10 rounded px-2 py-0.5 sm:max-w-44 break-all">
-                      {header.key}
-                    </span>
-                    <span className="text-sm text-muted-foreground break-all">{header.line}</span>
-                  </div>
-                ))}
+              <div className="p-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-foreground">All Headers</span>
+                  <span className="text-xs font-medium text-muted-foreground bg-muted rounded-full px-2 py-0.5">
+                    {email.headers.length}
+                  </span>
+                </div>
+                <div className="rounded-lg border border-border overflow-hidden">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-muted/60 hover:bg-muted/60">
+                        <TableHead className="w-[200px] font-semibold text-foreground">Key</TableHead>
+                        <TableHead className="font-semibold text-foreground">Value</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {email.headers.map((header, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-mono text-xs text-primary align-top break-all whitespace-normal py-3">
+                            {header.key}
+                          </TableCell>
+                          <TableCell className="text-sm text-muted-foreground align-top break-all whitespace-normal py-3">
+                            {header.line}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             ) : (
               <p className="text-muted-foreground p-4">No headers available.</p>
