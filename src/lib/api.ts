@@ -2,6 +2,11 @@ import axios, { AxiosError } from 'axios';
 
 const API_BASE_URL = 'https://api.testmail.app/api/json'; // pass the api key and the inbox id as search params
 
+export interface EmailHeader {
+  name: string;
+  value: string;
+}
+
 export interface Email {
   id: string;
   subject: string;
@@ -10,6 +15,7 @@ export interface Email {
   date: string;
   html: string;
   text: string;
+  headers: EmailHeader[];
   source: string;
   read: boolean;
 }

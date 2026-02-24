@@ -33,6 +33,9 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
               <TabsTrigger value="text" className="flex-1 sm:flex-none">
                 Text
               </TabsTrigger>
+              <TabsTrigger value="headers" className="flex-1 sm:flex-none">
+                Headers
+              </TabsTrigger>
             </TabsList>
           </div>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground mt-2">
@@ -69,6 +72,28 @@ export default function EmailPreview({ email }: EmailPreviewProps) {
           </TabsContent>
           <TabsContent value="text">
             <pre className="whitespace-pre-wrap text-muted-foreground p-2">{email.text}</pre>
+          </TabsContent>
+          <TabsContent value="headers">
+            {email.headers && email.headers.length > 0 ? (
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left font-semibold text-foreground p-2 w-1/3">Name</th>
+                    <th className="text-left font-semibold text-foreground p-2">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {email.headers.map((header, index) => (
+                    <tr key={index} className="border-b border-border last:border-0">
+                      <td className="p-2 font-medium text-foreground align-top break-all">{header.name}</td>
+                      <td className="p-2 text-muted-foreground align-top break-all">{header.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className="text-muted-foreground p-2">No headers available.</p>
+            )}
           </TabsContent>
         </div>
       </Tabs>
