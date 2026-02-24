@@ -2,6 +2,11 @@ import axios, { AxiosError } from 'axios';
 
 const API_BASE_URL = 'https://api.testmail.app/api/json'; // pass the api key and the inbox id as search params
 
+export interface EmailHeader {
+  key: string;
+  line: string;
+}
+
 export interface Email {
   id: string;
   subject: string;
@@ -10,6 +15,7 @@ export interface Email {
   date: string;
   html: string;
   text: string;
+  headers: EmailHeader[];
   source: string;
   read: boolean;
 }
@@ -43,6 +49,7 @@ export class TestmailClient {
         namespace: this.inboxId,
         offset,
         limit,
+        headers: 'true',
       };
       if (tagPrefix) params.tag_prefix = tagPrefix;
       if (dateFrom) params.timestamp_from = Math.floor(new Date(dateFrom).getTime() / 1000);
@@ -66,6 +73,7 @@ export class TestmailClient {
         params: {
           apikey: this.apiToken,
           namespace: this.inboxId,
+          headers: 'true',
         },
       });
 
