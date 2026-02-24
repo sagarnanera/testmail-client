@@ -49,6 +49,7 @@ export class TestmailClient {
         namespace: this.inboxId,
         offset,
         limit,
+        pretty: 1,
       };
       if (tagPrefix) params.tag_prefix = tagPrefix;
       if (dateFrom) params.timestamp_from = Math.floor(new Date(dateFrom).getTime() / 1000);
@@ -72,6 +73,7 @@ export class TestmailClient {
         params: {
           apikey: this.apiToken,
           namespace: this.inboxId,
+          pretty: 1,
         },
       });
 
